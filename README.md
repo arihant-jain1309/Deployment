@@ -1,10 +1,6 @@
-==========================================
 README: Deploy Portfolio & Snake-Bite Game on AWS EKS
-==========================================
 
-========================
 Stage 1 — Setup Ubuntu Environment
-========================
 
 sudo apt update && sudo apt install -y curl unzip git docker.io
 
@@ -28,9 +24,7 @@ eksctl version
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 helm version
 
-========================
 Stage 2 — Build & Push Docker Images
-========================
 
 docker login
 
@@ -42,9 +36,7 @@ docker push YOUR_USERNAME/portfolio:latest
 docker build -t YOUR_USERNAME/snake-bite-game:latest ./Snake-Bite-Game
 docker push YOUR_USERNAME/snake-bite-game:latest
 
-========================
 Stage 3 — Create EKS Cluster
-========================
 
 AWS_REGION=ap-south-1
 
@@ -59,26 +51,27 @@ eksctl create cluster \
   --managed
 
 kubectl get nodes
+
 kubectl cluster-info
 
-========================
 Stage 4 — Deploy Applications to Kubernetes
-========================
 
 kubectl apply -f portfolio-deployment.yaml
+
 kubectl apply -f snake-deployment.yaml
 
 kubectl get pods -o wide
+
 kubectl get svc
 
-========================
 Stage 5 — Expose Apps with Ingress
-========================
 
 kubectl create namespace ingress-nginx
 
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
 helm repo update
+
 helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx
 
 kubectl apply -f apps-ingress.yaml
