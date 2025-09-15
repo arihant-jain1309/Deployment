@@ -47,6 +47,7 @@ Stage 3 — Create EKS Cluster
 ========================
 
 AWS_REGION=ap-south-1
+
 eksctl create cluster \
   --name my-k8s-cluster \
   --region $AWS_REGION \
@@ -75,6 +76,7 @@ Stage 5 — Expose Apps with Ingress
 ========================
 
 kubectl create namespace ingress-nginx
+
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
 helm install nginx-ingress ingress-nginx/ingress-nginx --namespace ingress-nginx
