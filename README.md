@@ -1,31 +1,58 @@
-Stage 1 — Set up Ubuntu Environment
+**Stage 1 — Set up Ubuntu Environment
+**
+
 
 sudo apt update && sudo apt install -y curl unzip git docker.io
 
 # Start Docker and enable at boot
+
+
 sudo systemctl enable --now docker
 sudo usermod -aG docker $USER  # log out and back in
 
+
+
 # Install AWS CLI v2
+
+
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
 unzip /tmp/awscliv2.zip -d /tmp
 sudo /tmp/aws/install
 aws --version
 
+
+
 # Configure AWS credentials
+
+
 aws configure
 
+
+
 # Install kubectl
+
+
+
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 
+
+
 # Install eksctl
+
+
+
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
 
+
+
 # (Optional) Install Helm
+
+
+
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 helm version
 
@@ -51,6 +78,7 @@ Folder Structure
 
 
 Build & Push
+
 
 docker login  # Docker Hub
 # Portfolio
